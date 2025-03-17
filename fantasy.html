@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Team - Football Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(to right, #4338ca, #8b5cf6);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .formation-container {
+            flex: 1;
+            background: #d1d5db;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .field {
+            width: 100%;
+            height: 450px;
+            background: url('football-field.jpg') no-repeat center center/cover;
+            display: grid;
+            grid-template-rows: repeat(4, 1fr);
+            gap: 10px;
+            padding: 20px;
+        }
+        .formation-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .player-slot {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #8b5cf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            font-weight: bold;
+        }
+        .player-slot img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .players-container {
+            flex: 2;
+        }
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .player-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.3s;
+        }
+        .player-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .btn-select {
+            padding: 6px 12px;
+            margin-top: 10px;
+            background-color: #4338ca;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-select:hover {
+            background-color: #6366f1;
+        }
+        #confirm-button {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #4338ca;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fantasy Team - Football Hub</h1>
+        <nav>
+            <a href="index.html">Matches</a> |
+            <a href="news.html">News</a> |
+            <a href="fantasy.html">Fantasy Team</a> |
+            <a href="booking.html">Book Seats</a>
+        </nav>
+
+<label class="theme-switch">
+    <input type="checkbox" id="theme-toggle">
+    <span class="slider"></span>
+</label>
+
+    </header>
+
+    <div class="container">
+        <!-- Formation Field -->
+        <div class="formation-container">
+            <h2>Team Formation</h2>
+            <div class="field">
+                <div class="formation-row">
+                    <div class="player-slot" id="forward-1"></div>
+                    <div class="player-slot" id="forward-2"></div>
+                    <div class="player-slot" id="forward-3"></div>
+                </div>
+                <div class="formation-row">
+                    <div class="player-slot" id="midfielder-1"></div>
+                    <div class="player-slot" id="midfielder-2"></div>
+                    <div class="player-slot" id="midfielder-3"></div>
+                </div>
+                <div class="formation-row">
+                    <div class="player-slot" id="defender-1"></div>
+                    <div class="player-slot" id="defender-2"></div>
+                    <div class="player-slot" id="defender-3"></div>
+                    <div class="player-slot" id="defender-4"></div>
+                </div>
+                <div class="formation-row">
+                    <div class="player-slot" id="goalkeeper"></div>
+                </div>
+            </div>
+            <button id="confirm-button" onclick="confirmTeam()">Confirm Team</button>
+        </div>
+
+        <!-- Players Selection -->
+        <div class="players-container">
+            <h2>Create Your Fantasy Team of the week </h2>
+            <p><strong>Points Remaining:</strong> <span id="points">150</span></p>
+
+            <div id="players" class="player-grid"></div>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 Football Hub. All rights reserved.
+    </footer>
+
+    <script>
+        const players = [
+            { name: "Lionel Messi", position: "Forward", points: 15, img: "Lionel.png" },
+            { name: "Cristiano Ronaldo", position: "Forward", points: 14, img: "Ronaldo.png" },
+            { name: "Kylian Mbappe", position: "Forward", points: 13, img: "Mbappe.png" },
+            { name: "Erling Haaland", position: "Forward", points: 15, img: "Haaland.png" },
+            { name: "Erling Haaland", position: "Forward", points: 15, img: "Kane.png" },
+            { name: "Lewandowski", position: "Forward", points: 15, img: "Lewandowski.png" },
+            { name: "Jude Bellingham", position: "Midfielder", points: 10, img: "Jude.png" },
+            { name: "Declan Rice", position: "Midfielder", points: 14, img: "Rice.png" },
+            { name: "Rodri", position: "Midfielder", points: 14, img: "Rodri.png" },
+            { name: "Bruno Fernandes", position: "Midfielder", points: 14, img: "Bruno.png" },
+            { name: "Ruben Dias", position: "Defender", points: 14, img: "Dias.png" },
+            { name: "Joshua Kimmich", position: "Defender", points: 14, img: "Kimmich.png" },
+            { name: "Trent Alexander", position: "Defender", points: 14, img: "Trent.png" },
+            { name: "Dani Carvajal", position: "Defender", points: 14, img: "Dani.png" },
+            { name: "Ronaldo Araujo", position: "Defender", points: 14, img: "Ronald.png" },
+            { name: "Achraf Hakimi", position: "Defender", points: 14, img: "Hakimi.png" },
+            { name: "Theo Hernandez", position: "Defender", points: 14, img: "Theo.png" },
+            { name: "Marquinhos", position: "Defender", points: 14, img: "Marq.png" },
+            { name: "Emi Martinez", position: "Goalkeeper", points: 14, img: "Emi.png" },
+            { name: "Alisson Becker", position: "Goalkeeper", points: 14, img: "Alisson.png" }
+        ];
+
+        let points = 150;
+        let team = [];
+        let positionSlots = {
+            "Forward": ["forward-1", "forward-2", "forward-3"],
+            "Midfielder": ["midfielder-1", "midfielder-2", "midfielder-3"],
+            "Defender": ["defender-1", "defender-2", "defender-3", "defender-4"],
+            "Goalkeeper": ["goalkeeper"]
+        };
+
+        function renderPlayers() {
+            const playersContainer = document.getElementById('players');
+            playersContainer.innerHTML = '';
+            players.forEach((player, index) => {
+                playersContainer.innerHTML += `
+                    <div class="player-card">
+                        <strong>${player.name}</strong>
+                        <p>${player.position} - ${player.points} pts</p>
+                        <button class="btn-select" onclick="selectPlayer(${index})">Select</button>
+                    </div>`;
+            });
+        }
+
+        function selectPlayer(index) {
+            const player = players[index];
+            points -= player.points;
+            team.push(player);
+            players.splice(index, 1);
+            updateFormation(player);
+            document.getElementById('points').textContent = points;
+            renderPlayers();
+            checkTeamCompletion();
+        }
+
+        function updateFormation(player) {
+            let slotId = positionSlots[player.position]?.shift();
+            if (slotId) {
+                document.getElementById(slotId).innerHTML = `<img src="images/${player.img}" alt="${player.name}">`;
+            }
+        }
+
+        function confirmTeam() {
+            alert("Your fantasy team is confirmed!");
+        }
+
+        renderPlayers();
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Seat Booking</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+<button id="toggle-theme">🌞 Light Mode</button><h1>Football Hub</h1>
+<nav>
+<a href="index.html">Home</a>
+<a href="news.html">News</a>
+<a href="fantasy.html">Fantasy</a>
+<a href="team-picker.html">Choose Team</a>
+<a href="booking.html">Book Seats</a>
+</nav>
+</header>
+<main>
+<section>
+<h2>Select Your Seats</h2>
+<div class="seat-map" id="seat-map">
+<div class="seat-row">
+<button class="seat vip" data-price="100" id="seat1">1</button>
+<button class="seat vip" data-price="100" id="seat2">2</button>
+<button class="seat standard" data-price="50" id="seat3">3</button>
+<button class="seat standard" data-price="50" id="seat4">4</button>
+<button class="seat economy" data-price="30" id="seat5">5</button>
+</div>
+<div class="seat-row">
+<button class="seat economy" data-price="30" id="seat6">6</button>
+<button class="seat economy" data-price="30" id="seat7">7</button>
+<button class="seat standard" data-price="50" id="seat8">8</button>
+<button class="seat standard" data-price="50" id="seat9">9</button>
+<button class="seat vip" data-price="100" id="seat10">10</button>
+</div>
+</div>
+</section>
+<section>
+<h2>Booking Form</h2>
+<form id="booking-form">
+<label for="name">Name:</label>
+<input id="name" name="name" required="" type="text"/>
+<label for="email">Email:</label>
+<input id="email" name="email" required="" type="email"/>
+<label for="seats">Selected Seats:</label>
+<input id="seats" name="seats" readonly="" type="text"/>
+<label for="total">Total Price:</label>
+<input id="total" name="total" readonly="" type="text"/>
+<button type="submit">Confirm Booking</button>
+</form>
+</section>
+<section id="confirmation" style="display: none;">
+<h2>Booking Confirmation</h2>
+<p>Your booking has been confirmed for the following seats:</p>
+<p id="confirmation-seats"></p>
+<p>Total Price: <span id="confirmation-price"></span></p>
+</section>
+</main>
+<footer>
+<p>© 2025 Football Hub. All rights reserved.</p>
+<button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+</footer>
+<script>
+    const seats = document.querySelectorAll('.seat');
+    let selectedSeats = [];
+    let totalPrice = 0;
+
+    seats.forEach(seat => {
+      seat.addEventListener('click', () => {
+        const seatId = seat.id;
+        const seatPrice = parseInt(seat.dataset.price);
+
+        if (!seat.classList.contains('selected')) {
+          seat.classList.add('selected');
+          selectedSeats.push(seatId);
+          totalPrice += seatPrice;
+        } else {
+          seat.classList.remove('selected');
+          selectedSeats = selectedSeats.filter(id => id !== seatId);
+          totalPrice -= seatPrice;
+        }
+
+        document.getElementById('seats').value = selectedSeats.join(', ');
+        document.getElementById('total').value = `$${totalPrice}`;
+      });
+    });
+
+    document.getElementById('booking-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      if (selectedSeats.length > 0) {
+        document.getElementById('confirmation-seats').textContent = selectedSeats.join(', ');
+        document.getElementById('confirmation-price').textContent = `$${totalPrice}`;
+        document.getElementById('confirmation').style.display = 'block';
+      } else {
+        alert('Please select at least one seat.');
+      }
+    });
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+    }
+
+    // Apply dark mode on page load
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark');
+    }
+  </script>
+<script src="script.js"></script></body>
+</html>

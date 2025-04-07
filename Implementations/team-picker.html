@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Select Your Favorite Team</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body><button id="darkModeToggle">Toggle Dark Mode</button>
+<main style="padding: 2rem; text-align: center;">
+<h1>Welcome to Football Hub</h1>
+<p>Select your favorite team to get a personalized dashboard:</p>
+<select id="team-select">
+<option disabled="" selected="" value="">Choose a team...</option>
+<option data-name="Manchester United" value="33">Manchester United</option>
+<option data-name="Manchester City" value="50">Manchester City</option>
+<option data-name="Chelsea" value="49">Chelsea</option>
+<option data-name="Liverpool" value="47">Liverpool</option>
+<option data-name="Arsenal" value="40">Arsenal</option>
+<option data-name="Real Madrid" value="66">Real Madrid</option>
+<option data-name="Barcelona" value="529">Barcelona</option>
+<option data-name="Bayern Munich" value="541">Bayern Munich</option>
+<option data-name="Juventus" value="496">Juventus</option>
+</select>
+<br/><br/>
+<button onclick="saveFavorite()">Continue</button>
+</main>
+<script>
+    function saveFavorite() {
+      const selector = document.getElementById('team-select');
+      const teamId = selector.value;
+      const teamName = selector.options[selector.selectedIndex].dataset.name;
+      if (!teamId) {{
+        alert("Please select a team.");
+        return;
+      }}
+      localStorage.setItem("favoriteTeamId", teamId);
+      localStorage.setItem("favoriteTeamName", teamName);
+      window.location.href = "index.html";
+    }
+  </script>
+<script src="script.js"></script><script src="team-dashboard.js"></script></body>
+</html>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const toggleButton = document.createElement("button");
+      toggleButton.textContent = "Toggle Dark Mode";
+      toggleButton.style.position = "fixed";
+      toggleButton.style.top = "20px";
+      toggleButton.style.right = "20px";
+      toggleButton.style.padding = "10px 20px";
+      toggleButton.style.backgroundColor = "#f5f5f5";
+      toggleButton.style.border = "none";
+      toggleButton.style.borderRadius = "5px";
+      toggleButton.style.cursor = "pointer";
+      document.body.appendChild(toggleButton);
+
+      toggleButton.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          const elements = document.querySelectorAll("header, footer, .card, button, select, #team-live, #team-history, #team-standings");
+          elements.forEach(el => el.classList.toggle("dark-mode"));
+      });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      // Check for dark mode preference in localStorage
+      if (localStorage.getItem("darkMode") === "enabled") {
+          document.body.classList.add("dark-mode");
+          const elements = document.querySelectorAll("header, footer, .card, button, select, #team-live, #team-history, #team-standings");
+          elements.forEach(el => el.classList.add("dark-mode"));
+      }
+
+      const toggleButton = document.createElement("button");
+      toggleButton.textContent = "Toggle Dark Mode";
+      toggleButton.style.position = "fixed";
+      toggleButton.style.top = "20px";
+      toggleButton.style.right = "20px";
+      toggleButton.style.padding = "10px 20px";
+      toggleButton.style.backgroundColor = "#f5f5f5";
+      toggleButton.style.border = "none";
+      toggleButton.style.borderRadius = "5px";
+      toggleButton.style.cursor = "pointer";
+      document.body.appendChild(toggleButton);
+
+      toggleButton.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          const elements = document.querySelectorAll("header, footer, .card, button, select, #team-live, #team-history, #team-standings");
+          elements.forEach(el => el.classList.toggle("dark-mode"));
+
+          // Save the dark mode state
+          if (document.body.classList.contains("dark-mode")) {
+              localStorage.setItem("darkMode", "enabled");
+          } else {
+              localStorage.setItem("darkMode", "disabled");
+          }
+      });
+  });
+</script>

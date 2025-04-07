@@ -1,0 +1,140 @@
+
+/* Base Styling */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #f9f9f9, #dbe4f0);
+    color: #111;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+body.dark {
+    background: linear-gradient(to bottom, #121212, #2a2a2a);
+    color: #eee;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #3b4cc0;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#toggle-theme {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    padding: 8px 12px;
+    border: none;
+    background-color: white;
+    color: #3b4cc0;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#toggle-theme:hover {
+    background-color: #e0e0e0;
+}
+
+/* Main Section */
+main {
+    padding: 30px 20px;
+}
+
+section {
+    background-color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 30px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+body.dark section {
+    background-color: rgba(40, 40, 40, 0.85);
+}
+
+/* Form Elements */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+body.dark input, body.dark select, body.dark textarea {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+/* Buttons */
+button, input[type="submit"] {
+    background-color: #3b4cc0;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #2a3990;
+}
+
+footer {
+    background-color: #3b4cc0;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    margin-top: 40px;
+}
+
+/* Seat Booking Specific */
+.seat-map {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    background-color: #ccc;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #000;
+    border: 2px solid #999;
+    cursor: pointer;
+}
+
+.seat.vip { background-color: #ffd700; }
+.seat.standard { background-color: #87cefa; }
+.seat.economy { background-color: #90ee90; }
+
+.seat.selected {
+    border: 3px solid #000;
+    outline: 2px solid #444;
+}

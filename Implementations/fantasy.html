@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fantasy Team - Football Hub</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fantasy Team - Football Hub</title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f9fafb;
@@ -128,64 +129,57 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Fantasy Team - Football Hub</h1>
-        <nav>
-            <a href="index.html">Matches</a> |
+<header>
+<button id="toggle-theme">🌞 Light Mode</button><h1>Fantasy Team - Football Hub</h1>
+<nav>
+<a href="index.html">Matches</a> |
             <a href="news.html">News</a> |
             <a href="fantasy.html">Fantasy Team</a> |
             <a href="booking.html">Book Seats</a>
-        </nav>
-
+</nav>
 <label class="theme-switch">
-    <input type="checkbox" id="theme-toggle">
-    <span class="slider"></span>
+<input id="theme-toggle" type="checkbox"/>
+<span class="slider"></span>
 </label>
-
-    </header>
-
-    <div class="container">
-        <!-- Formation Field -->
-        <div class="formation-container">
-            <h2>Team Formation</h2>
-            <div class="field">
-                <div class="formation-row">
-                    <div class="player-slot" id="forward-1"></div>
-                    <div class="player-slot" id="forward-2"></div>
-                    <div class="player-slot" id="forward-3"></div>
-                </div>
-                <div class="formation-row">
-                    <div class="player-slot" id="midfielder-1"></div>
-                    <div class="player-slot" id="midfielder-2"></div>
-                    <div class="player-slot" id="midfielder-3"></div>
-                </div>
-                <div class="formation-row">
-                    <div class="player-slot" id="defender-1"></div>
-                    <div class="player-slot" id="defender-2"></div>
-                    <div class="player-slot" id="defender-3"></div>
-                    <div class="player-slot" id="defender-4"></div>
-                </div>
-                <div class="formation-row">
-                    <div class="player-slot" id="goalkeeper"></div>
-                </div>
-            </div>
-            <button id="confirm-button" onclick="confirmTeam()">Confirm Team</button>
-        </div>
-
-        <!-- Players Selection -->
-        <div class="players-container">
-            <h2>Create Your Fantasy Team of the week </h2>
-            <p><strong>Points Remaining:</strong> <span id="points">150</span></p>
-
-            <div id="players" class="player-grid"></div>
-        </div>
-    </div>
-
-    <footer>
+</header>
+<div class="container">
+<!-- Formation Field -->
+<div class="formation-container">
+<h2>Team Formation</h2>
+<div class="field">
+<div class="formation-row">
+<div class="player-slot" id="forward-1"></div>
+<div class="player-slot" id="forward-2"></div>
+<div class="player-slot" id="forward-3"></div>
+</div>
+<div class="formation-row">
+<div class="player-slot" id="midfielder-1"></div>
+<div class="player-slot" id="midfielder-2"></div>
+<div class="player-slot" id="midfielder-3"></div>
+</div>
+<div class="formation-row">
+<div class="player-slot" id="defender-1"></div>
+<div class="player-slot" id="defender-2"></div>
+<div class="player-slot" id="defender-3"></div>
+<div class="player-slot" id="defender-4"></div>
+</div>
+<div class="formation-row">
+<div class="player-slot" id="goalkeeper"></div>
+</div>
+</div>
+<button id="confirm-button" onclick="confirmTeam()">Confirm Team</button>
+</div>
+<!-- Players Selection -->
+<div class="players-container">
+<h2>Create Your Fantasy Team of the week </h2>
+<p><strong>Points Remaining:</strong> <span id="points">150</span></p>
+<div class="player-grid" id="players"></div>
+</div>
+</div>
+<footer>
         © 2025 Football Hub. All rights reserved.
     </footer>
-
-    <script>
+<script>
         const players = [
             { name: "Lionel Messi", position: "Forward", points: 15, img: "Lionel.png" },
             { name: "Cristiano Ronaldo", position: "Forward", points: 14, img: "Ronaldo.png" },
@@ -255,5 +249,40 @@
 
         renderPlayers();
     </script>
-</body>
+<script src="script.js"></script></body>
 </html>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      // Check for dark mode preference in localStorage
+      if (localStorage.getItem("darkMode") === "enabled") {
+          document.body.classList.add("dark-mode");
+          const elements = document.querySelectorAll("header, footer, .card, button, select, #team-live, #team-history, #team-standings");
+          elements.forEach(el => el.classList.add("dark-mode"));
+      }
+
+      const toggleButton = document.createElement("button");
+      toggleButton.textContent = "Toggle Dark Mode";
+      toggleButton.style.position = "fixed";
+      toggleButton.style.top = "20px";
+      toggleButton.style.right = "20px";
+      toggleButton.style.padding = "10px 20px";
+      toggleButton.style.backgroundColor = "#f5f5f5";
+      toggleButton.style.border = "none";
+      toggleButton.style.borderRadius = "5px";
+      toggleButton.style.cursor = "pointer";
+      document.body.appendChild(toggleButton);
+
+      toggleButton.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          const elements = document.querySelectorAll("header, footer, .card, button, select, #team-live, #team-history, #team-standings");
+          elements.forEach(el => el.classList.toggle("dark-mode"));
+
+          // Save the dark mode state
+          if (document.body.classList.contains("dark-mode")) {
+              localStorage.setItem("darkMode", "enabled");
+          } else {
+              localStorage.setItem("darkMode", "disabled");
+          }
+      });
+  });
+</script>

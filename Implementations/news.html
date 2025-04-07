@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Page</title>
+<link href="styles.css" rel="stylesheet"/>
+<script defer="" src="news.js"></script>
+</head>
+<body>
+<header>
+<button id="toggle-theme">🌞 Light Mode</button><h1>Welcome to the News Page</h1>
+<nav>
+<a href="index.html">Home</a>
+<a href="news.html">News</a>
+<a href="fantasy.html">Fantasy Team</a>
+<a href="booking.html">Book Seats</a>
+</nav>
+<label class="theme-switch">
+<input id="theme-toggle" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</header>
+<main class="news_container">
+<section class="card" id="rss-news">
+<h2>Your Latest Football News</h2>
+<div id="news-feed">Loading news...</div>
+</section>
+</main>
+<footer>
+<p>© 2025 Football Hub</p>
+</footer>
+<script src="script.js"></script></body>
+</html>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      // Check for dark mode preference in localStorage
+      if (localStorage.getItem("darkMode") === "enabled") {
+          document.body.classList.add("dark-mode");
+          const elements = document.querySelectorAll("header, footer, .card, button, select, #team-live, #team-history, #team-standings");
+          elements.forEach(el => el.classList.add("dark-mode"));
+      }
+
+      const toggleButton = document.createElement("button");
+      toggleButton.textContent = "Toggle Dark Mode";
+      toggleButton.style.position = "fixed";
+      toggleButton.style.top = "20px";
+      toggleButton.style.right = "20px";
+      toggleButton.style.padding = "10px 20px";
+      toggleButton.style.backgroundColor = "#f5f5f5";
+      toggleButton.style.border = "none";
+      toggleButton.style.borderRadius = "5px";
+      toggleButton.style.cursor = "pointer";
+      document.body.appendChild(toggleButton);
+
+      toggleButton.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          const elements = document.querySelectorAll("header, footer, .card, button, select, #team-live, #team-history, #team-standings");
+          elements.forEach(el => el.classList.toggle("dark-mode"));
+
+          // Save the dark mode state
+          if (document.body.classList.contains("dark-mode")) {
+              localStorage.setItem("darkMode", "enabled");
+          } else {
+              localStorage.setItem("darkMode", "disabled");
+          }
+      });
+  });
+</script>

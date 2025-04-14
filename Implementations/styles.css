@@ -5,13 +5,13 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom, #005cfa, #000000);
-    color: #111;
+    color: #222720;
     transition: background 1s ease, color 1s ease;
 }
 
 body.dark {
     background: linear-gradient(to bottom, #121212, #2a2a2a);
-    color: #0e84f3;
+    color: #0682f7;
 }
 .fixture-wrapper {
     display: flex;
@@ -44,9 +44,9 @@ body.dark {
   
 /* Header and Navigation */
 header {
-    background-color: #3b4cc0;
+    background-color: #151c49;
     padding: 20px;
-    color: white;
+    color: rgb(10, 10, 10);
     text-align: center;
     position: relative;
 }

@@ -6,6 +6,72 @@
 <meta charset="utf-8"/>
 <title>Football Hub</title>
 <link href="styles.css" rel="stylesheet"/>
+<style>
+      * { box-sizing: border-box; }
+  
+
+    .carousel-container {
+      position: relative;
+      max-width: 800px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .slides {
+      display: none;
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s ease;
+      user-select: none;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 0 3px 3px 0;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .dots {
+      text-align: center;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: #717171;
+    }
+</style>
 </head>
 <body>
 <script>
@@ -24,24 +90,20 @@
 </header>
 <main style="padding: 1rem;">
 <section>
-<h2>Top Headlines</h2>
-<div class="carousel">
-<div class="carousel-item">
-<img alt="Headline 1" src="https://via.placeholder.com/400x200?text=Headline+1"/>
-<h3>Headline Title 1</h3>
-<p>Short description of headline 1 goes here.</p>
-</div>
-<div class="carousel-item">
-<img alt="Headline 2" src="https://via.placeholder.com/400x200?text=Headline+2"/>
-<h3>Headline Title 2</h3>
-<p>Short description of headline 2 goes here.</p>
-</div>
-<div class="carousel-item">
-<img alt="Headline 3" src="https://via.placeholder.com/400x200?text=Headline+3"/>
-<h3>Headline Title 3</h3>
-<p>Short description of headline 3 goes here.</p>
-</div>
-</div>
+  <div class="carousel-container">
+    <img class="slides" src="images/CRAlNassar.jpg" alt="Slide 1">
+    <img class="slides" src="images/CRAlNassar2.jpeg" alt="Slide 2">
+    <img class="slides" src="images/CRAlNassar3.jpg" alt="Slide 3">
+  
+    <a class="prev" onclick="changeSlide(-1)">❮</a>
+    <a class="next" onclick="changeSlide(1)">❯</a>
+  </div>
+  
+  <div class="dots">
+    <span class="dot" onclick="currentSlide(1)"></span> 
+    <span class="dot" onclick="currentSlide(2)"></span> 
+    <span class="dot" onclick="currentSlide(3)"></span> 
+  </div>
 </section>
 <section>
 <h2>Select League</h2>
@@ -54,12 +116,61 @@
 </select>
 </section>
 <section>
-<h2>Live Scores</h2>
-<div class="live-scores">Loading scores...</div>
+<h2>Recent Scores</h2>
+<div class="Recent-scores" style="text-align: center;">
+  <h3>AL NASSAR vs AL RIYADH</h3>
+  <h1>2-1</h1>
+  <h3>CHELSEA vs IPSWICH </h3>
+  <h1>2-2</h1>
+  <h3>LIVERPOOL vs WESTHAM</h3>
+  <h1>2-1</h1>
+  <h3>NEW CASTLE vs MAN UNITED</h3>
+  <h1>4-1</h1>
+</div>
 </section>
 <section>
 <h2>Upcoming Fixtures</h2>
-<div class="fixtures">Loading fixtures...</div>
+<div class="fixture-table-container ">
+  <table border="4" style="text-align: center;vertical-align: middle;width: 450px;">
+    <tr>
+      <td>14-April-2025</td>
+      <TD><img src="images/bmouth.png" width="50px"><br><b>Bournemouth</b></TD>
+      <td style="align-self:center;">vs<h2>Next Match in </h2>
+        <div id="countdown" style="font-size: 24px; font-weight: bold;"></div></td></td>
+      <TD><img src="images/fullham.png" width="50px"><br><b>Fullham</b></TD>
+    </tr>
+    <tr>
+      <td>16-April-2025</td>
+      <TD><img src="images/NC.png" width="50px"><br><b>New Castle</b></TD>
+      <td style="align-self:center;">vs</td>
+      <TD><img src="images/CP.png" width="50px"><br><b>Crystal Palace</b></TD>
+    </tr>
+    <tr>
+      <td>19-April-2025</td>
+      <TD><img src="images/BRENTFORD.png" width="50px"><br><b>Brent ford</b></TD>
+      <td style="align-self:center;">vs</td>
+      <TD><img src="images/brighton.png" width="50px"><br><b>Brighton</b></TD>
+    </tr>
+    <tr>
+      <td>19-April-2025</td>
+      <TD><img src="images/CP.png" width="50px"><br><b>Crystal Palace</b></TD>
+      <td style="align-self:center;">vs</td>
+      <TD><img src="images/bmouth.png" width="50px"><br><b>Bournemouth</b></TD>
+    </tr>
+    <tr>
+      <td>19-April-2025</td>
+      <TD><img src="images/Everton.png" width="50px"><br><b>Everton</b></TD>
+      <td style="align-self:center;">vs</td>
+      <TD><img src="images/manc.png" width="50px"><br><b>Man City</b></TD>
+    </tr>
+    <tr>
+      <td>19-April-2025</td>
+      <TD><img src="images/AV.png" width="50px"><br><b>Ashton Villa</b></TD>
+      <td style="align-self:center;">vs</td>
+      <TD><img src="images/NC.png" width="50px"><br><b>New Castle</b></TD>
+    </tr>
+  </table>
+</div>
 </section>
 </main>
 <footer>
@@ -88,8 +199,7 @@
           elements.forEach(el => el.classList.toggle("dark-mode"));
       });
   });
-</script>
-<script>
+
   document.addEventListener("DOMContentLoaded", () => {
       const toggleButton = document.createElement("button");
       toggleButton.textContent = "Toggle Dark Mode";
@@ -109,8 +219,38 @@
           elements.forEach(el => el.classList.toggle("dark-mode"));
       });
   });
-</script>
-<script>
+
+  let slideIndex = 1;
+  showSlide(slideIndex);
+
+  function changeSlide(n) {
+    showSlide(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlide(slideIndex = n);
+  }
+
+  function showSlide(n) {
+    let i;
+    const slides = document.getElementsByClassName("slides");
+    const dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+    }
+
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex - 1].style.display = "block";  
+    dots[slideIndex - 1].className += " active";
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
       // Check for dark mode preference in localStorage
       if (localStorage.getItem("darkMode") === "enabled") {
@@ -143,5 +283,30 @@
               localStorage.setItem("darkMode", "disabled");
           }
       });
+      // Set the date for the next match
+  
+  const targetDate  = new Date("April 14, 2025 12:00:00").getTime(); 
+  const countdown   = document.getElementById("countdown");
+  
+
+  const timer = setInterval(function () {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  if (distance < 0) {
+    clearInterval(timer);
+    countdown.innerHTML = "Kick-off time!";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}, 1000);
   });
+
+
 </script>
